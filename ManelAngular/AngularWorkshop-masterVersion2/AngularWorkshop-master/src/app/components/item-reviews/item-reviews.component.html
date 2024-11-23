@@ -1,0 +1,128 @@
+<div class="container">
+  <h1 class="title">Item Reviews</h1>
+
+  <!-- Input et bouton de recherche -->
+  <div class="search-bar">
+    <input [(ngModel)]="itemName" placeholder="Enter item name" class="input" />
+    <button (click)="searchReviews()" class="button">Search Reviews</button>
+  </div>
+
+  <!-- Message d'erreur -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Affichage de l'item et de ses reviews -->
+  <div *ngIf="item" class="reviews-section">
+    <h2 class="subtitle">Reviews for {{ item.name }}</h2>
+
+    <!-- Si des reviews existent -->
+    <div *ngIf="reviews.length > 0" class="reviews-list">
+      <ul>
+        <li *ngFor="let review of reviews" class="review-item">
+          <strong>{{ review.username }}</strong> (Rating: {{ review.rating }})
+          <p>{{ review.comments }}</p>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Si aucune review n'est trouvée -->
+    <div *ngIf="reviews.length === 0" class="no-reviews">
+      <p>No reviews available for this item.</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Conteneur principal */
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  /* Titre principal */
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  /* Barre de recherche */
+  .search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .input {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .button {
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Message d'erreur */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* Section des reviews */
+  .reviews-section {
+    margin-top: 20px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  /* Liste des reviews */
+  .reviews-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .review-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .review-item strong {
+    color: #333;
+  }
+
+  /* Message "No reviews" */
+  .no-reviews {
+    color: #555;
+    font-style: italic;
+  }
+</style>
